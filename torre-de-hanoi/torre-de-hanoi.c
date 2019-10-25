@@ -4,7 +4,7 @@
 
 
 
-// Objetivo -> Mudar o esquema de matrizes
+// Objetivo -> Mudar o esquema para matrizes
 
 int x, i, j;
 
@@ -366,6 +366,7 @@ void auto_hanoi(int n, int m, char ori, char des, char aux, int* tor){
     auto_hanoi(n-1, m, aux, des, ori, tor); // recurs�o que usa a auxiliar como origem, e a origem como auxiliar
 }
 
+// Mostra as instruções do jogo - Escolha 3 no menu
 void hanoiInstructions()
 {
     printf("\n\nA torre de Hanoi eh um jogo onde existem tres torres e n discos.\n");
@@ -379,7 +380,7 @@ void hanoiInstructions()
 
 }
 
-// Função que resolve as torres sozinha
+// Função que resolve as torres sozinha - Escolha 2 no menu
 void hanoiSolve()
 {
     int i, c;       // Indexes
@@ -412,7 +413,7 @@ void hanoiSolve()
     printf("------------------------------\n\n");
 }
 
-// Função que permite o usuário fazer as jogadas da torre de Hanoi
+// Função que permite o usuário fazer as jogadas da torre de Hanoi - Escolha 1 no menu
 void hanoiPlay()
 {
     int numDiscos;                                    // Variável que guarda a quantidade de discos
@@ -494,6 +495,7 @@ void hanoiPlay()
     printf("------------------------------\n\n");
 }
 
+// Função principal do jogo
 void hanoiMain()
 {
     int gameRunning = 1;
