@@ -366,6 +366,12 @@ void auto_hanoi(int n, int m, char ori, char des, char aux, int* tor){
     auto_hanoi(n-1, m, aux, des, ori, tor); // recurs�o que usa a auxiliar como origem, e a origem como auxiliar
 }
 
+/* 
+ #############################################
+ #              Funções do menu
+ ############################################
+*/
+
 // Mostra as instruções do jogo - Escolha 3 no menu
 void hanoiInstructions()
 {
