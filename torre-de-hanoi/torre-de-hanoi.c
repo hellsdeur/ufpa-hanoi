@@ -411,6 +411,88 @@ void hanoiSolve()
     printf("------------------------------\n\n");
 }
 
+// Função que permite o usuário fazer as jogadas da torre de Hanoi
+void hanoiPlay()
+{
+    int numDiscos;                                    // Variável que guarda a quantidade de discos
+    int torreOrigem, torreDestino, torreDisco;        // Variáveis de torres     
+    int verificaDisco, verificaTorresZeradas;         // Variáveis verificadoras
+    int verificaTransferencia, verificaResposta = 0;  // Variáveis verificadoras
+    int rodadas = 0;                                  // Contador de rodadas
+    
+    printf("Digite a quantidade de discos: ");
+    scanf("%d", &numDiscos);
+
+    // A quantidade de discos deve ser menor do que 20
+    while(numDiscos <= 0 || numDiscos > 20){
+        printf("ALERTA: Limite de discos = 20\n\n");
+        printf("Digite a quantidade de discos: ");
+        scanf("%d", &numDiscos);
+    }
+
+    int* torrePrincipal = criarTorre(numDiscos); // Ponteiro que guarda o array da torre
+
+    printTorre(torrePrincipal, numDiscos);
+
+    // Enquanto a verificadora de resposta retornar 0, o jogador continua jogando
+    while(verificaResposta == 0){
+        rodadas++;
+
+        printf("-----------------------------\n\n");
+        printf("Rodada %d\n\n", rodadas);
+
+        printf("Qual a torre de origem? ");
+        scanf("%d", &torreOrigem);
+
+        verificaTorresZeradas = verifTorreZerada(torrePrincipal, torreOrigem, numDiscos); // verificar se a torre possui discos
+
+        while(torreOrigem < 1 || torreOrigem > 3 || verificaTorresZeradas == 0){
+            printf("ALERTA: Escolha uma torre nao-nula: {1, 2, 3}\n");
+
+            printf("Qual a torre de origem? ");
+            scanf("%d", &torreOrigem);
+                        
+            verificaTorresZeradas = verifTorreZerada(torrePrincipal, torreOrigem, numDiscos);
+        }
+
+        printf("Qual o disco a mover? "); // escolher o disco a mover
+        scanf("%d", &torreDisco);
+    
+        verificaDisco = verifDisco(torrePrincipal, torreOrigem, torreDisco); // verificar se o disco est� na torre e no topo
+                    
+        while(torreDisco < 1 || torreDisco > numDiscos || verificaDisco == 0){
+            printf("ALERTA: Disco invalido\n");
+            printf("Qual o disco a mover? ");
+            scanf("%d", &torreDisco);
+            verificaDisco = verifDisco(torrePrincipal, torreOrigem, torreDisco);
+        }
+
+        printf("Qual a torre de destino? "); // usu�rio informa a torre de destino
+        scanf("%d", &torreDestino);
+
+        verificaTransferencia = verifTransf(torrePrincipal, torreDestino, torreDisco); // verificar se o disco do topo da torre de destino � maior que o disco que se deseja transferir
+        
+        while(verificaTransferencia == 0){
+            printf("Impossivel colocar disco maior acima de menor\n");
+            printf("Qual a torre de destino? ");
+            scanf("%d", &torreDestino);
+            verificaTransferencia = verifTransf(torrePrincipal, torreDestino, torreDisco);
+        }
+
+        torrePrincipal = moverDiscos(torrePrincipal, torreDestino, torreDisco, torreOrigem); // mover disco entre as torres de origem e destino
+
+        printTorre(torrePrincipal, numDiscos);
+        verificaResposta = verifResposta(torrePrincipal, numDiscos); // verificar a resposta
+    }
+
+    printf("------------------------------\n");
+    printf("------------PARABÉNS----------\n");
+    printf("------------------------------\n\n");
+    printf("Torres de hanoi com %d discos, completados em %d rodadas.\n", numDiscos, rodadas);
+
+    printf("------------------------------\n\n");
+}
+
 int main(){
 
     printf("------------------------------\n");
@@ -418,130 +500,31 @@ int main(){
     printf("------------------------------\n\n");
 
     while (1){
-        int numDiscos;                                    // Variável que guarda a quantidade de discos
-        int torreOrigem, torreDestino, torreDisco;        // Variáveis de torres     -> ori: torre de origem; des: torre de destino; pec: pe�a a mexer
-        int verificaDisco, verificaTorresZeradas;         // Variáveis verificadoras -> vD: verifica disco na torre; vtz: verifica torres zeradas
-        int verificaTransferencia, verificaResposta = 0;  // Variáveis verificadoras -> vT: verifica possib. de transferencia; vR: verifica resposta
-        int rodadas = 0;                                  // contador de rodadas
-
-        int menu;
+        int menuChoice;
 
         printf("1 - Jogar\n2 - Modo Automatico\n3 - Regras\n4 - Sair\n\n");
         printf("Digite a opção desejada: ");
-        scanf("%d", &menu);
+        scanf("%d", &menuChoice);
 
-        switch(menu){
-        // Opção de Jogar
+        switch(menuChoice){
+            // Opção de Jogar
             case 1:
-                printf("Digite a quantidade de discos: ");
-                scanf("%d", &numDiscos);
-
-                // A quantidade de discos deve ser menor do que 20
-                while(numDiscos <= 0 || numDiscos > 20){
-                    printf("ALERTA: Limite de discos = 20\n\n");
-                    printf("Digite a quantidade de discos: ");
-                    scanf("%d", &numDiscos);
-                }
-
-                int* torrePrincipal = criarTorre(numDiscos); // Ponteiro que guarda o array da torre
-
-                printTorre(torrePrincipal, numDiscos);
-
-                // Enquanto a verificadora de resposta retornar 0, o jogador continua jogando
-                while(verificaResposta == 0){
-                    rodadas++;
-
-                    printf("-----------------------------\n\n");
-                    printf("Rodada %d\n\n", rodadas);
-
-                    printf("Qual a torre de origem? ");
-                    scanf("%d", &torreOrigem);
-
-                    verificaTorresZeradas = verifTorreZerada(torrePrincipal, torreOrigem, numDiscos); // verificar se a torre possui discos
-
-                    while(torreOrigem < 1 || torreOrigem > 3 || verificaTorresZeradas == 0){
-                        printf("ALERTA: Escolha uma torre nao-nula: {1, 2, 3}\n");
-
-                        printf("Qual a torre de origem? ");
-                        scanf("%d", &torreOrigem);
-                        
-                        verificaTorresZeradas = verifTorreZerada(torrePrincipal, torreOrigem, numDiscos);
-                    }
-
-                    printf("Qual o disco a mover? "); // escolher o disco a mover
-                    scanf("%d", &torreDisco);
-    
-                    verificaDisco = verifDisco(torrePrincipal, torreOrigem, torreDisco); // verificar se o disco est� na torre e no topo
-                    
-                    while(torreDisco < 1 || torreDisco > numDiscos || verificaDisco == 0){
-                        printf("ALERTA: Disco invalido\n");
-                        printf("Qual o disco a mover? ");
-                        scanf("%d", &torreDisco);
-                        verificaDisco = verifDisco(torrePrincipal, torreOrigem, torreDisco);
-                    }
-
-                    printf("Qual a torre de destino? "); // usu�rio informa a torre de destino
-                    scanf("%d", &torreDestino);
-                    verificaTransferencia = verifTransf(torrePrincipal, torreDestino, torreDisco); // verificar se o disco do topo da torre de destino � maior que o disco que se deseja transferir
-                    while(verificaTransferencia == 0){
-                        printf("Impossivel colocar disco maior acima de menor\n");
-                        printf("Qual a torre de destino? ");
-                        scanf("%d", &torreDestino);
-                        verificaTransferencia = verifTransf(torrePrincipal, torreDestino, torreDisco);
-                    }
-
-                    torrePrincipal = moverDiscos(torrePrincipal, torreDestino, torreDisco, torreOrigem); // mover disco entre as torres de origem e destino
-
-                    printTorre(torrePrincipal, numDiscos);
-                    verificaResposta = verifResposta(torrePrincipal, numDiscos); // verificar a resposta
-                }
-
-                printf("------------------------------\n");
-                printf("------------PARABÉNS----------\n");
-                printf("------------------------------\n\n");
-                printf("Torres de hanoi com %d discos, completados em %d rodadas.\n", numDiscos, rodadas);
-
-                printf("------------------------------\n\n");
+                hanoiPlay();
                 break;
             
             // Resolve sozinho
             case 2:
-                // hanoiSolve();
-
-                printf("Digite a quantidade de discos: ");
-                scanf("%d", &numDiscos);
-
-                // O limite de discos é 20
-                while(numDiscos <= 0 || numDiscos > 20){
-                    printf("ALERTA: Limite de discos = 20\n\n");
-                    printf("Digite a quantidade de discos: ");
-                    scanf("%d", &numDiscos);
-                }
-
-                int m = numDiscos;
-                int c = 20 - numDiscos;
-                int* torre_auto = criarTorre(numDiscos);
-
-                printf("\n\n");
-                printf("-----------------------------\n\n");
-                for (i = c; i < 20; i++){
-                    printf("| %d |   | %d |   | %d |\n", torre_auto[i], torre_auto[i + 20], torre_auto[i + 40]);
-                }
-                printf("\n\n");
-
-                auto_hanoi(numDiscos, m, 'A', 'C', 'B', torre_auto);
-
-                printf("Torres de hanoi com %d discos, completados em %.lf rodadas.\n", numDiscos, pow(2, numDiscos) - 1);
-                printf("------------------------------\n\n");
+                hanoiSolve();
                 break;
 
             // Instruções do jogo
             case 3:
                 hanoiInstructions();
+                break;
             
             // Sair do jogo
             case 4:
-                return 2;
+                return 0;
                 break;
             }
 
