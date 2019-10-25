@@ -535,40 +535,7 @@ void hanoiMain()
 
 int main(){
     
-    printf("------------------------------\n");
-    printf("--------TORRES DE HANOI-------\n");
-    printf("------------------------------\n\n");
-
-    while (1){
-        int menuChoice;
-
-        printf("1 - Jogar\n2 - Modo Automatico\n3 - Regras\n4 - Sair\n\n");
-        printf("Digite a opção desejada: ");
-        scanf("%d", &menuChoice);
-
-        switch(menuChoice){
-            // Opção de Jogar
-            case 1:
-                hanoiPlay();
-                break;
-            
-            // Resolve sozinho
-            case 2:
-                hanoiSolve();
-                break;
-
-            // Instruções do jogo
-            case 3:
-                hanoiInstructions();
-                break;
-            
-            // Sair do jogo
-            case 4:
-                return 0;
-                break;
-            }
-
-        }
+    hanoiMain();
 
     return 0;
 }
