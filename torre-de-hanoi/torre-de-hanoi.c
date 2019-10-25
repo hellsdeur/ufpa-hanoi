@@ -67,7 +67,9 @@ int verifTorreZerada(int* t, int o, int x){
 
 // Verifica se o disco existe na torre
 int verifDisco(int* t, int o, int pec){ // verifica a presen�a do disco na torre e se ele pode se mexer
+
     int i;
+
     if (o == 1){
         for(i = 0; i < 20; i++){
                 if (t[i] == pec){
@@ -157,7 +159,7 @@ int verifTransf(int*t, int d, int p){
 }
 
 // moverDiscos(torre, destino, peça, origem)
-int moverDiscos(int *t, int d, int p, int o){
+int* moverDiscos(int *t, int d, int p, int o){
     int i;
 
     // ##   Origem
@@ -403,7 +405,7 @@ void hanoiSolve()
     }
 
     int m = numDiscos;
-    int c = 20 - numDiscos;
+    c = 20 - numDiscos;
     int* torre_auto = criarTorre(numDiscos);
 
     printf("\n\n");
