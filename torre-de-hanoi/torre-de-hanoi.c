@@ -379,6 +379,7 @@ void hanoiInstructions()
 
 }
 
+// Função que resolve as torres sozinha
 void hanoiSolve()
 {
     int i, c;       // Indexes
@@ -493,8 +494,47 @@ void hanoiPlay()
     printf("------------------------------\n\n");
 }
 
-int main(){
+void hanoiMain()
+{
+    int gameRunning = 1;
 
+    printf("------------------------------\n");
+    printf("--------TORRES DE HANOI-------\n");
+    printf("------------------------------\n\n");
+
+    while (gameRunning){
+        int menuChoice;
+
+        printf("1 - Jogar\n2 - Modo Automatico\n3 - Regras\n4 - Sair\n\n");
+        printf("Digite a opção desejada: ");
+        scanf("%d", &menuChoice);
+
+        switch(menuChoice){
+            // Opção de Jogar
+            case 1:
+                hanoiPlay();
+                break;
+            
+            // Resolve sozinho
+            case 2:
+                hanoiSolve();
+                break;
+
+            // Instruções do jogo
+            case 3:
+                hanoiInstructions();
+                break;
+            
+            // Sair do jogo
+            case 4:
+                gameRunning = 0;
+                break;
+        }
+    }
+}
+
+int main(){
+    
     printf("------------------------------\n");
     printf("--------TORRES DE HANOI-------\n");
     printf("------------------------------\n\n");
