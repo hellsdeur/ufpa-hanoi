@@ -378,13 +378,13 @@ void auto_hanoi(int n, int m, char ori, char des, char aux, int* tor){
 void hanoiInstructions()
 {
     printf("\n\nA torre de Hanoi eh um jogo onde existem tres torres e n discos.\n");
-                printf("O objetivo do jogo eh mover todos os discos da primeira para a\n");
-                printf("ultima torre, utilizando a restante como torre auxiliar, seguindo\n");
-                printf("as seguintes regras:\n");
-                printf("   1. Apenas um disco pode ser movido de cada vez.\n");
-                printf("   2. Cada movimento consiste de tirar o disco do topo\n");
-                printf("      de uma das torres e posiciona-lo no topo de outra\n");
-                printf("   3. Nenhum disco pode ser posicionado acima de um disco menor.\n\n");
+    printf("O objetivo do jogo eh mover todos os discos da primeira para a\n");
+    printf("ultima torre, utilizando a restante como torre auxiliar, seguindo\n");
+    printf("as seguintes regras:\n");
+    printf("   1. Apenas um disco pode ser movido de cada vez.\n");
+    printf("   2. Cada movimento consiste de tirar o disco do topo\n");
+    printf("      de uma das torres e posiciona-lo no topo de outra\n");
+    printf("   3. Nenhum disco pode ser posicionado acima de um disco menor.\n\n");
 
 }
 
